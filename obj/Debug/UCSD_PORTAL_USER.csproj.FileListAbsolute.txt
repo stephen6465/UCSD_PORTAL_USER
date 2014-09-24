@@ -1,1 +1,2 @@
 c:\users\swilson\documents\visual studio 2013\Projects\UCSD_PORTAL_USER\UCSD_PORTAL_USER\bin\Debug\UCSD_PORTAL_USER.exe.config
+C:\Users\swilson\Documents\Visual Studio 2013\Projects\UCSD_PORTAL_USER\bin\Debug\UCSD_PORTAL_USER.exe.config
