@@ -29,7 +29,8 @@ namespace UCSD_PORTAL_USER
         UCSDSettings t = new UCSDSettings();
         UCSDSettings t2;
         private System.Timers.Timer timer;
-        
+        DayOfWeek lastDayRan;
+
         public UCSD_PORTAL_USER()
         {
             this.ServiceName = "UCSD_PORTAL_USER";
@@ -45,7 +46,6 @@ namespace UCSD_PORTAL_USER
             }
             eventLog1.Source = "UCSD_USER_PORTAL";
             eventLog1.Log = "UCSD_USER_PORTAL_LOG";
-
 
             UCSDSettings t = new UCSDSettings();
             eventLog1.WriteEntry("Created UCSD Setting object");
@@ -97,8 +97,7 @@ namespace UCSD_PORTAL_USER
                 return ds;
             }
         }
-       
-
+ 
         private String GetID(OleDbConnection mvdata)
         {
             bool exists = true;
@@ -144,8 +143,6 @@ namespace UCSD_PORTAL_USER
         {
             eventLog1.WriteEntry("IN OnStartup");
 
-          
-
             this.timer = new System.Timers.Timer(300000D);  // 300,000 milliseconds = 5mins 
             this.timer.AutoReset = true;
             this.timer.Elapsed += new System.Timers.ElapsedEventHandler( this.timer_Elapsed);
@@ -161,7 +158,9 @@ namespace UCSD_PORTAL_USER
             //it is between 9 and 12pm except on sunday
             // check if the current time is right then do work here so 1 compare time and then do work!
 
-            if ((dt.Hour >= 21 && dt.Hour <= 24) && dt.DayOfWeek != DayOfWeek.Sunday && !this.ranToday && !this.running)
+            
+
+            if ((dt.Hour >= 21 && dt.Hour <= 24) && dt.DayOfWeek != DayOfWeek.Sunday && this.lastDayRan != dt.DayOfWeek && !this.running)
             {
 
                 try
@@ -304,10 +303,7 @@ namespace UCSD_PORTAL_USER
 
         }
 
-
-
-
-        
+ 
     }
 
     [Serializable()]
